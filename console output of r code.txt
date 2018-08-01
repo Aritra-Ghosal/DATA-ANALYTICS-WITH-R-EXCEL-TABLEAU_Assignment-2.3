@@ -1,0 +1,28 @@
+> m=10
+> n=rnorm(10)
+> x=data.frame(replicate(m,rnorm(n)))
+> d=x
+> t1=Sys.time()
+> for(i in seq(nrow(x))){
++   for(j in seq(nrow(x))){
++     d[i,j]=round(d[i,j]+sin(1.570796),3)
++   }
++ }
+> t2=Sys.time()
+> print(paste0("For loops takes", round((t2-t1),5),"second"))
+[1] "For loops takes0.05682second"
+> z=x
+> t3=Sys.time()
+> y=sapply(z,function(k){k=round(k+sin(1.570796),3)})
+> t4=Sys.time()
+> print(paste0("for loop takes",round((t4-t3),5),"seconds"))
+[1] "for loop takes0.01856seconds"
+> x[1,]
+         X1         X2       X3         X4         X5         X6         X7         X8         X9      X10
+1 0.7326863 -0.5558107 -1.13176 -0.2118081 0.04899648 -0.4668907 -0.4605091 -0.7242527 0.09841029 1.503212
+> y[1,]
+    X1     X2     X3     X4     X5     X6     X7     X8     X9    X10 
+ 1.733  0.444 -0.132  0.788  1.049  0.533  0.539  0.276  1.098  2.503 
+> d[1,]
+     X1    X2     X3    X4    X5    X6    X7    X8    X9   X10
+1 1.733 0.444 -0.132 0.788 1.049 0.533 0.539 0.276 1.098 2.503
